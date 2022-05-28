@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="text-center">Completed Orders</h3>
+                {% if cart_items %}
+                <div class="table-responsive">
+                    <table class="table table-dark">
+                        <thead>
+                        <tr>
+                            <td scope="col">Order No.</td>
+                            <th scope="col">User</th>
+                            <th scope="col">User Email</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Specification</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total Pieces</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Order Time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart in cart_items %}
+                        <tr>
+                            <td>{{ cart.id }}</td>
+                            <td>{{ cart.user.username }}</td>
+                            <td>{{ cart.user.email}}</td>
+                            <td>{{ cart.title }} <span class="badge badge-{{ cart.item.label_colour }}">{{ cart.item.labels }}</span></td>
+                            <td>{{ cart.description }}</td>
+                            <td>{{ cart.instructions }}</td>
+                            <td>{{ cart.price }}</td>
+                            <td>{{ cart.portions }} pieces</td>
+                            <td>{{ cart.status }}</td>
+                            <td>{{ cart.ordered_on }} GMT</td>
+                        </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <h4 class="text-center">Sorry, you have not completed any orders!!!</h4>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
